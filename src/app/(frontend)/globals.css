@@ -1,6 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .line-clamp-4 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+}
 
 @layer base {
   h1,
@@ -14,73 +46,111 @@
   }
 
   :root {
+    /* Modern Editorial Color Palette */
+    --page-background: 0 0% 100%;
+
+    /* Content area - pure white */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 5%;
 
-    --card: 240 5% 96%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card styling - subtle off-white */
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 5%;
 
+    /* Popover - clean white */
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 5%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - deep charcoal for headers/footers */
+    --primary: 0 0% 8%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - warm light grey */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 5%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted - very light grey */
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - editorial red */
+    --accent: 0 75% 50%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Destructive - soft red */
+    --destructive: 0 60% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 240 6% 80%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders and inputs */
+    --border: 0 0% 90%;
+    --input: 0 0% 96%;
+    --ring: 0 0% 8%;
 
-    --radius: 0.2rem;
+    --radius: 0.25rem;
 
-    --success: 196 52% 74%;
-    --warning: 34 89% 85%;
-    --error: 10 100% 86%;
+    /* Editorial colors */
+    --editorial-red: 0 75% 50%;
+    --editorial-gold: 45 85% 60%;
+    --editorial-blue: 210 100% 25%;
+    --editorial-green: 120 40% 40%;
+
+    /* Status colors */
+    --success: 120 40% 50%;
+    --warning: 45 80% 60%;
+    --error: 0 60% 60%;
   }
 
   [data-theme="dark"] {
-    --background: 0 0% 0%;
-    --foreground: 210 40% 98%;
+    /* Page background - deep dark */
+    --page-background: 0 0% 4%;
 
-    --card: 0 0% 4%;
-    --card-foreground: 210 40% 98%;
+    /* Content area - dark grey */
+    --background: 0 0% 6%;
+    --foreground: 0 0% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    /* Card styling - slightly lighter dark */
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Popover - dark */
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 95%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    /* Primary - light for contrast */
+    --primary: 0 0% 95%;
+    --primary-foreground: 0 0% 6%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Secondary - dark grey */
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 95%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Muted - darker grey */
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    /* Accent - muted red for dark mode */
+    --accent: 0 60% 60%;
+    --accent-foreground: 0 0% 95%;
 
-    --border: 0, 0%, 15%, 0.8;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    /* Destructive - softer red for dark */
+    --destructive: 0 50% 65%;
+    --destructive-foreground: 0 0% 95%;
 
-    --success: 196 100% 14%;
-    --warning: 34 51% 25%;
-    --error: 10 39% 43%;
+    /* Borders and inputs */
+    --border: 0 0% 20%;
+    --input: 0 0% 12%;
+    --ring: 0 0% 95%;
+
+    /* Editorial colors for dark mode */
+    --editorial-red: 0 60% 60%;
+    --editorial-gold: 45 70% 50%;
+    --editorial-blue: 210 80% 60%;
+    --editorial-green: 120 30% 50%;
+
+    /* Status colors for dark mode */
+    --success: 120 40% 50%;
+    --warning: 45 70% 50%;
+    --error: 0 50% 65%;
   }
 }
 
@@ -88,8 +158,187 @@
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    @apply text-foreground min-h-[100vh] flex flex-col;
+    background-color: hsl(var(--page-background));
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Main content container - clean white area */
+  .content-frame {
+    @apply bg-background mx-auto max-w-none;
+    min-height: 100vh;
+  }
+
+  /* Editorial typography */
+  .font-editorial {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  }
+
+  /* Smooth transitions for interactive elements */
+  .transition-editorial {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Focus styles */
+  .focus-editorial {
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+  }
+}
+
+@layer utilities {
+  /* Modern Typography Scale */
+  .text-display {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .text-hero {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .text-headline {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .text-title {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .text-subtitle {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    line-height: 1.5;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+
+  .text-body {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  .text-body-large {
+    font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  .text-caption {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-weight: 400;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .text-small {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    font-weight: 400;
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Editorial specific utilities */
+  .text-editorial-red {
+    color: hsl(var(--editorial-red));
+  }
+
+  .text-editorial-gold {
+    color: hsl(var(--editorial-gold));
+  }
+
+  .text-editorial-blue {
+    color: hsl(var(--editorial-blue));
+  }
+
+  .text-editorial-green {
+    color: hsl(var(--editorial-green));
+  }
+
+  /* Layout utilities */
+  .container-editorial {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 lg:py-24;
+  }
+
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }
 

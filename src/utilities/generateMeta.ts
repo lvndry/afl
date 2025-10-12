@@ -5,7 +5,7 @@ import type { Config, Media, Page, Post } from "../payload-types";
 import { getServerSideURL } from "./getURL";
 import { mergeOpenGraph } from "./mergeOpenGraph";
 
-const getImageURL = (image?: Media | Config["db"]["defaultIDType"] | null) => {
+function getImageURL(image?: Media | Config["db"]["defaultIDType"] | null) {
   const serverUrl = getServerSideURL();
 
   let url = serverUrl + "/website-template-OG.webp";
@@ -17,18 +17,18 @@ const getImageURL = (image?: Media | Config["db"]["defaultIDType"] | null) => {
   }
 
   return url;
-};
+}
 
-export const generateMeta = async (args: {
+export async function generateMeta(args: {
   doc: Partial<Page> | Partial<Post> | null;
-}): Promise<Metadata> => {
+}): Promise<Metadata> {
   const { doc } = args;
 
   const ogImage = getImageURL(doc?.meta?.image);
 
   const title = doc?.meta?.title
-    ? doc?.meta?.title + " | Payload Website Template"
-    : "Payload Website Template";
+    ? doc?.meta?.title + " | Afrique en Lumiere"
+    : "Afrique en Lumiere";
 
   return {
     description: doc?.meta?.description,
@@ -46,4 +46,4 @@ export const generateMeta = async (args: {
     }),
     title,
   };
-};
+}

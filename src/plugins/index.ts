@@ -1,28 +1,27 @@
+import { revalidateRedirects } from "@/hooks/revalidateRedirects";
+import type { Page, Post } from "@/payload-types";
+import { beforeSyncWithSearch } from "@/search/beforeSync";
+import { searchFields } from "@/search/fieldOverrides";
 import { payloadCloudPlugin } from "@payloadcms/payload-cloud";
 import { formBuilderPlugin } from "@payloadcms/plugin-form-builder";
 import { nestedDocsPlugin } from "@payloadcms/plugin-nested-docs";
 import { redirectsPlugin } from "@payloadcms/plugin-redirects";
-import { seoPlugin } from "@payloadcms/plugin-seo";
 import { searchPlugin } from "@payloadcms/plugin-search";
-import { Plugin } from "payload";
-import { revalidateRedirects } from "@/hooks/revalidateRedirects";
-import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
+import { seoPlugin } from "@payloadcms/plugin-seo";
 import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
-import { searchFields } from "@/search/fieldOverrides";
-import { beforeSyncWithSearch } from "@/search/beforeSync";
+import type { Plugin } from "payload";
 
-import { Page, Post } from "@/payload-types";
 import { getServerSideURL } from "@/utilities/getURL";
 
-const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Payload Website Template` : "Payload Website Template";
-};
+function generateTitle({ doc }: { doc: Post | Page }) {
+  return doc?.title ? `${doc.title} | Afrique en Lumiere` : "Afrique en Lumiere";
+}
 
-const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
+function generateURL({ doc }: { doc: Post | Page }) {
   const url = getServerSideURL();
 
   return doc?.slug ? `${url}/${doc.slug}` : url;
-};
+}
 
 export const plugins: Plugin[] = [
   redirectsPlugin({
