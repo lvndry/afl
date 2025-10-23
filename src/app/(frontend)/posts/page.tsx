@@ -1,11 +1,10 @@
 import type { Metadata } from "next/types";
 
-import { CollectionArchive } from "@/components/CollectionArchive";
-import { PageRange } from "@/components/PageRange";
-import { Pagination } from "@/components/Pagination";
+import { ArticleCard } from "@/components/ui/article-card";
 import configPromise from "@payload-config";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { getPayload } from "payload";
-import React from "react";
 import PageClient from "./page.client";
 
 export const dynamic = "force-static";
@@ -16,15 +15,9 @@ export default async function Page() {
 
   const posts = await payload.find({
     collection: "posts",
-    depth: 1,
-    limit: 12,
+    depth: 2, // Increased depth for populated fields
+    limit: 10, // Adjusted limit to show fewer per page like Mansa
     overrideAccess: false,
-    select: {
-      title: true,
-      slug: true,
-      categories: true,
-      meta: true,
-    },
   });
 
   return (
@@ -32,24 +25,30 @@ export default async function Page() {
       <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
+          <h1 className="text-5xl font-bold mb-4">À la une</h1>
+          <p className="text-xl text-muted-foreground max-w-2xl">
+            Follow our latest news, events, and voices that bring African worlds to life in the
+            present.
+          </p>
         </div>
       </div>
 
-      <div className="container mb-8">
-        <PageRange
-          collection="posts"
-          currentPage={posts.page}
-          limit={12}
-          totalDocs={posts.totalDocs}
-        />
-      </div>
-
-      <CollectionArchive posts={posts.docs} />
-
       <div className="container">
+        <div className="space-y-8 max-w-3xl mx-auto">
+          {posts.docs.map((post) => (
+            <ArticleCard key={post.id} post={post} variant="compact" />
+          ))}
+        </div>
+
         {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
+          <div className="mt-12 text-center">
+            <Link
+              href={`/posts/page/${posts.page + 1}`}
+              className="inline-flex items-center gap-2 text-lg font-medium text-editorial-red hover:gap-3 transition-all"
+            >
+              Voir plus <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         )}
       </div>
     </div>
@@ -58,6 +57,7 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Payload Website Template Posts`,
+    title: `Latest News - Creative Media Platform`,
+    description: `Follow our latest news, events, and voices that bring African worlds to life in the present.`,
   };
 }

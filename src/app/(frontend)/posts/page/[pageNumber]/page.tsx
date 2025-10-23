@@ -1,13 +1,12 @@
 import type { Metadata } from "next/types";
 
-import { CollectionArchive } from "@/components/CollectionArchive";
-import { PageRange } from "@/components/PageRange";
-import { Pagination } from "@/components/Pagination";
+import { ArticleCard } from "@/components/ui/article-card";
 import configPromise from "@payload-config";
-import { getPayload } from "payload";
-import React from "react";
-import PageClient from "./page.client";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getPayload } from "payload";
+import PageClient from "./page.client";
 
 export const revalidate = 600;
 
@@ -27,8 +26,8 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   const posts = await payload.find({
     collection: "posts",
-    depth: 1,
-    limit: 12,
+    depth: 2,
+    limit: 10,
     page: sanitizedPageNumber,
     overrideAccess: false,
   });
@@ -38,24 +37,32 @@ export default async function Page({ params: paramsPromise }: Args) {
       <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
+          <h1 className="text-5xl font-bold mb-4">À la une</h1>
+          <p className="text-xl text-muted-foreground max-w-2xl">
+            Follow our latest news, events, and voices that bring African worlds to life in the
+            present.
+          </p>
         </div>
       </div>
 
-      <div className="container mb-8">
-        <PageRange
-          collection="posts"
-          currentPage={posts.page}
-          limit={12}
-          totalDocs={posts.totalDocs}
-        />
-      </div>
-
-      <CollectionArchive posts={posts.docs} />
-
       <div className="container">
-        {posts?.page && posts?.totalPages > 1 && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
+        <div className="space-y-8 max-w-3xl mx-auto">
+          {posts.docs.map((post) => (
+            <ArticleCard key={post.id} post={post} variant="compact" />
+          ))}
+        </div>
+
+        {posts.page && posts.totalPages > 1 && (
+          <div className="mt-12 text-center">
+            {posts.hasNextPage && (
+              <Link
+                href={`/posts/page/${posts.page + 1}`}
+                className="inline-flex items-center gap-2 text-lg font-medium text-editorial-red hover:gap-3 transition-all"
+              >
+                Voir plus <ArrowRight className="w-4 h-4" />
+              </Link>
+            )}
+          </div>
         )}
       </div>
     </div>
@@ -65,7 +72,8 @@ export default async function Page({ params: paramsPromise }: Args) {
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { pageNumber } = await paramsPromise;
   return {
-    title: `Payload Website Template Posts Page ${pageNumber || ""}`,
+    title: `Latest News - Page ${pageNumber} - Creative Media Platform`,
+    description: `Follow our latest news, events, and voices that bring African worlds to life in the present.`,
   };
 }
 
