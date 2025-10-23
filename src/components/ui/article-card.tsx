@@ -16,6 +16,7 @@ interface ArticleCardPost {
   };
   publishedAt?: string | null;
   authors?: (string | UserType)[] | null;
+  populatedAuthors?: UserType[];
   heroImage?: (string | null) | Media;
 }
 
@@ -27,8 +28,9 @@ interface ArticleCardProps {
 }
 
 export function ArticleCard({ post, variant = "default", className, style }: ArticleCardProps) {
+  console.log(post.populatedAuthors);
   const category = post.categories?.[0];
-  const author = post.authors?.[0];
+  const author = post.populatedAuthors?.[0];
   const publishedDate = post.publishedAt
     ? new Date(post.publishedAt).toLocaleDateString("en-US", {
         month: "short",
