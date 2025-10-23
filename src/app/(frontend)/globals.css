@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -163,7 +161,7 @@
     @apply text-foreground min-h-[100vh] flex flex-col;
     background-color: hsl(var(--page-background));
     font-family:
-      "Inter",
+      var(--font-geist-sans, ui-sans-serif),
       -apple-system,
       BlinkMacSystemFont,
       "Segoe UI",
@@ -182,7 +180,7 @@
 
   /* Editorial typography */
   .font-editorial {
-    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-family: var(--font-serif), Georgia, "Times New Roman", serif;
   }
 
   /* Smooth transitions for interactive elements */
@@ -208,7 +206,7 @@
 @layer utilities {
   /* Modern Typography Scale */
   .text-display {
-    font-family: "Playfair Display", Georgia, serif;
+    font-family: var(--font-serif), Georgia, serif;
     font-size: clamp(3rem, 8vw, 6rem);
     line-height: 1.1;
     font-weight: 800;
@@ -216,7 +214,7 @@
   }
 
   .text-hero {
-    font-family: "Playfair Display", Georgia, serif;
+    font-family: var(--font-serif), Georgia, serif;
     font-size: clamp(2.5rem, 6vw, 4rem);
     line-height: 1.2;
     font-weight: 700;
@@ -224,7 +222,7 @@
   }
 
   .text-headline {
-    font-family: "Playfair Display", Georgia, serif;
+    font-family: var(--font-serif), Georgia, serif;
     font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.3;
     font-weight: 600;
@@ -232,7 +230,7 @@
   }
 
   .text-title {
-    font-family: "Playfair Display", Georgia, serif;
+    font-family: var(--font-serif), Georgia, serif;
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     line-height: 1.4;
     font-weight: 600;

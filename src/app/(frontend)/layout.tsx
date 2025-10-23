@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { cn } from "@/utilities/ui";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
+import { Fraunces } from "next/font/google";
 import React from "react";
 
 import { AdminBar } from "@/components/AdminBar";
@@ -16,12 +17,19 @@ import { getServerSideURL } from "@/utilities/getURL";
 
 import "./globals.css";
 
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-serif",
+  axes: ["SOFT", "WONK"],
+});
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode();
 
   return (
     <html
-      className={cn(GeistSans.variable, GeistMono.variable)}
+      className={cn(GeistSans.variable, GeistMono.variable, fraunces.variable)}
       lang="en"
       data-theme="light"
       suppressHydrationWarning
