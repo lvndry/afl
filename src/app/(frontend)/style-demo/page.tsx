@@ -108,26 +108,25 @@ export default function StyleDemoPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <ArticleCard
-              title="A Continually Unfolding History of Architecture"
-              excerpt="This is a sample article excerpt that demonstrates the new typography and styling system. The text flows beautifully with proper spacing and readability."
-              category="Sustainability"
-              author={{
-                name: "Amélie Laurent",
-                title: "Sustainable Design, Craft+Curiosity",
+              post={{
+                id: "1",
+                slug: "a-continually-unfolding-history-of-architecture",
+                title: "A Continually Unfolding History of Architecture",
+                categories: ["Sustainability"],
+                authors: ["Amélie Laurent"],
+                publishedAt: "Dec 12, 2024",
               }}
-              publishedAt="Dec 12, 2024"
-              image="/placeholder-architecture.jpg"
             />
 
             <ArticleCard
-              title="Modern Minimalist Design Principles"
-              excerpt="Exploring the fundamental principles that guide contemporary minimalist architecture and how they create spaces that feel both functional and beautiful."
-              category="Design"
-              author={{
-                name: "Jean-Pierre Dubois",
-                title: "Principal Architect",
+              post={{
+                id: "2",
+                slug: "modern-minimalist-design-principles",
+                title: "Modern Minimalist Design Principles",
+                categories: ["Design"],
+                authors: ["Jean-Pierre Dubois"],
+                publishedAt: "Dec 10, 2024",
               }}
-              publishedAt="Dec 10, 2024"
             />
           </div>
         </section>

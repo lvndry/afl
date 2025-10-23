@@ -1,4 +1,5 @@
 "use client";
+
 import { useHeaderTheme } from "@/providers/HeaderTheme";
 import { Menu, Search, X } from "lucide-react";
 import Link from "next/link";
@@ -9,7 +10,6 @@ import type { Header } from "@/payload-types";
 
 import { CMSLink } from "@/components/Link";
 import { Logo } from "@/components/Logo/Logo";
-import { ThemeSelector } from "@/providers/Theme/ThemeSelector";
 
 interface HeaderClientProps {
   data: Header;
@@ -89,8 +89,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
                 <Search className="w-5 h-5" />
               </button>
 
-              {/* Theme Selector */}
-              <ThemeSelector />
+              {/* Theme Selector removed */}
 
               {/* Mobile Menu Button */}
               <button

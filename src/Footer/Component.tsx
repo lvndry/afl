@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import { CMSLink } from "@/components/Link";
 import { Logo } from "@/components/Logo/Logo";
-import { ThemeSelector } from "@/providers/Theme/ThemeSelector";
 
 export async function Footer() {
   return (
@@ -184,7 +183,7 @@ export async function Footer() {
                   },
                 }}
               />
-              <ThemeSelector />
+              {/* Theme Selector removed */}
             </div>
           </div>
         </div>
