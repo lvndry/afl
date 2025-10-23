@@ -2,7 +2,7 @@ import { mongooseAdapter } from "@payloadcms/db-mongodb";
 
 import path from "path";
 import { buildConfig, PayloadRequest } from "payload";
-import sharp from "sharp"; // sharp-import
+import sharp from "sharp";
 import { fileURLToPath } from "url";
 
 import { defaultLexical } from "@/fields/defaultLexical";
@@ -26,7 +26,7 @@ export default buildConfig({
     fallback: true,
   },
   admin: {
-    components: {},
+    autoRefresh: true,
     importMap: {
       baseDir: path.resolve(dirname),
     },

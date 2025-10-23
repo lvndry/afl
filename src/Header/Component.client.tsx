@@ -85,9 +85,13 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             {/* Right side actions */}
             <div className="flex items-center gap-4">
               {/* Search */}
-              <button className="p-2 text-foreground/60 hover:text-foreground transition-colors">
+              <Link
+                href="/search"
+                className="p-2 text-foreground/60 hover:text-foreground transition-colors"
+                aria-label="Search"
+              >
                 <Search className="w-5 h-5" />
-              </button>
+              </Link>
 
               {/* Theme Selector removed */}
 

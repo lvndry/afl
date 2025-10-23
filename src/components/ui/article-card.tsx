@@ -16,7 +16,7 @@ interface ArticleCardPost {
   };
   publishedAt?: string | null;
   authors?: (string | UserType)[] | null;
-  populatedAuthors?: UserType[];
+  populatedAuthors?: { id?: string | null | undefined; name?: string | null | undefined }[] | null;
   heroImage?: (string | null) | Media;
 }
 
@@ -28,7 +28,6 @@ interface ArticleCardProps {
 }
 
 export function ArticleCard({ post, variant = "default", className, style }: ArticleCardProps) {
-  console.log(post.populatedAuthors);
   const category = post.categories?.[0];
   const author = post.populatedAuthors?.[0];
   const publishedDate = post.publishedAt
