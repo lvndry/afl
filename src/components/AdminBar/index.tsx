@@ -9,6 +9,7 @@ import React, { useState } from "react";
 
 import "./index.scss";
 
+import { useAdminBar } from "@/providers/AdminBar";
 import { getClientSideURL } from "@/utilities/getURL";
 
 const baseClass = "admin-bar";
@@ -36,18 +37,24 @@ export const AdminBar: React.FC<{
   const { adminBarProps } = props || {};
   const segments = useSelectedLayoutSegments();
   const [show, setShow] = useState(false);
+  const { setIsVisible } = useAdminBar();
   const collection = (
     collectionLabels[segments?.[1] as keyof typeof collectionLabels] ? segments[1] : "pages"
   ) as keyof typeof collectionLabels;
   const router = useRouter();
 
-  const onAuthChange = React.useCallback((user: PayloadMeUser) => {
-    setShow(Boolean(user?.id));
-  }, []);
+  const onAuthChange = React.useCallback(
+    (user: PayloadMeUser) => {
+      const isVisible = Boolean(user?.id);
+      setShow(isVisible);
+      setIsVisible(isVisible);
+    },
+    [setIsVisible],
+  );
 
   return (
     <div
-      className={cn(baseClass, "py-2 bg-black text-white relative z-[51]", {
+      className={cn(baseClass, "py-2 bg-black text-white fixed top-0 left-0 right-0", {
         block: show,
         hidden: !show,
       })}

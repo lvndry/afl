@@ -1,5 +1,6 @@
 "use client";
 
+import { useAdminBar } from "@/providers/AdminBar";
 import { useHeaderTheme } from "@/providers/HeaderTheme";
 import { Menu, Search, X } from "lucide-react";
 import Link from "next/link";
@@ -24,6 +25,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, locale = "fr" 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { headerTheme, setHeaderTheme } = useHeaderTheme();
+  const { isVisible: isAdminBarVisible } = useAdminBar();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -48,16 +50,17 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, locale = "fr" 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
+          isAdminBarVisible && !isScrolled ? "top-10" : "top-0"
+        } ${
           isScrolled
             ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
             : "bg-transparent"
         }`}
         {...(theme ? { "data-theme": theme } : {})}
       >
-        <div className="container-editorial">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
               <Logo
                 loading="eager"
@@ -68,7 +71,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, locale = "fr" 
                 {SITE_CONFIG.name}
               </span>
             </Link>
-
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-8">
               {data.navItems?.map((item) => (
@@ -84,7 +86,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, locale = "fr" 
                 </CMSLink>
               ))}
             </nav>
-
             {/* Right side actions */}
             <div className="flex items-center gap-4">
               {/* Search */}
@@ -130,7 +131,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, locale = "fr" 
       </header>
 
       {/* Spacer to prevent content from being hidden behind fixed header */}
-      <div className="h-20" />
+      <div className={`${isAdminBarVisible && !isScrolled ? "h-28" : "h-20"}`} />
     </>
   );
 };
