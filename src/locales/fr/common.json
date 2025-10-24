@@ -33,5 +33,22 @@
   "header": {
     "search": "Rechercher",
     "toggleMenu": "Basculer le menu"
+  },
+  "posts": {
+    "title": "À la une",
+    "description": "Suivez nos dernières nouvelles, événements et voix qui donnent vie aux mondes africains dans le présent.",
+    "loadMore": "Voir plus",
+    "pageTitle": "Dernières Nouvelles - Page {pageNumber} - Plateforme de Médias Créatifs",
+    "mainTitle": "Dernières Nouvelles - Plateforme de Médias Créatifs"
+  },
+  "common": {
+    "featuredStory": "Histoire en vedette",
+    "article": "Article",
+    "anonymous": "Anonyme",
+    "goHome": "Retour à l'accueil",
+    "pageNotFound": "Cette page n'a pas pu être trouvée.",
+    "untitledCategory": "Catégorie sans titre",
+    "author": "Auteur",
+    "datePublished": "Date de publication"
   }
 }

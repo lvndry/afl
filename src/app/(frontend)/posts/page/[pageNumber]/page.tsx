@@ -1,8 +1,10 @@
 import type { Metadata } from "next/types";
 
 import { ArticleCard } from "@/components/ui/article-card";
+import { getTranslation, type Locale } from "@/utilities/translations";
 import configPromise from "@payload-config";
 import { ArrowRight } from "lucide-react";
+import { headers } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPayload } from "payload";
@@ -19,6 +21,11 @@ type Args = {
 export default async function Page({ params: paramsPromise }: Args) {
   const { pageNumber } = await paramsPromise;
   const payload = await getPayload({ config: configPromise });
+
+  // Get locale from headers
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") || "";
+  const locale = (pathname.split("/")[1] as Locale) || "fr";
 
   const sanitizedPageNumber = Number(pageNumber);
 
@@ -37,10 +44,9 @@ export default async function Page({ params: paramsPromise }: Args) {
       <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
-          <h1 className="text-5xl font-bold mb-4">À la une</h1>
+          <h1 className="text-5xl font-bold mb-4">{getTranslation(locale, "posts.title")}</h1>
           <p className="text-xl text-muted-foreground max-w-2xl">
-            Follow our latest news, events, and voices that bring African worlds to life in the
-            present.
+            {getTranslation(locale, "posts.description")}
           </p>
         </div>
       </div>
@@ -59,7 +65,7 @@ export default async function Page({ params: paramsPromise }: Args) {
                 href={`/posts/page/${posts.page + 1}`}
                 className="inline-flex items-center gap-2 text-lg font-medium text-editorial-red hover:gap-3 transition-all"
               >
-                Voir plus <ArrowRight className="w-4 h-4" />
+                {getTranslation(locale, "posts.loadMore")} <ArrowRight className="w-4 h-4" />
               </Link>
             )}
           </div>
@@ -71,9 +77,15 @@ export default async function Page({ params: paramsPromise }: Args) {
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { pageNumber } = await paramsPromise;
+
+  // Get locale from headers
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") || "";
+  const locale = (pathname.split("/")[1] as Locale) || "fr";
+
   return {
-    title: `Latest News - Page ${pageNumber} - Creative Media Platform`,
-    description: `Follow our latest news, events, and voices that bring African worlds to life in the present.`,
+    title: getTranslation(locale, "posts.pageTitle").replace("{pageNumber}", pageNumber),
+    description: getTranslation(locale, "posts.description"),
   };
 }
 

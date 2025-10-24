@@ -1,15 +1,22 @@
-import { formatDateTime } from "src/utilities/formatDateTime";
 import React from "react";
+import { formatDateTime } from "src/utilities/formatDateTime";
 
 import type { Post } from "@/payload-types";
 
 import { Media } from "@/components/Media";
 import { formatAuthors } from "@/utilities/formatAuthors";
+import { getTranslation, type Locale } from "@/utilities/translations";
+import { headers } from "next/headers";
 
 export const PostHero: React.FC<{
   post: Post;
-}> = ({ post }) => {
+}> = async ({ post }) => {
   const { categories, heroImage, populatedAuthors, publishedAt, title } = post;
+
+  // Get locale from headers
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") || "";
+  const locale = (pathname.split("/")[1] as Locale) || "fr";
 
   const hasAuthors =
     populatedAuthors && populatedAuthors.length > 0 && formatAuthors(populatedAuthors) !== "";
@@ -23,7 +30,8 @@ export const PostHero: React.FC<{
               if (typeof category === "object" && category !== null) {
                 const { title: categoryTitle } = category;
 
-                const titleToUse = categoryTitle || "Untitled category";
+                const titleToUse =
+                  categoryTitle || getTranslation(locale, "common.untitledCategory");
 
                 const isLast = index === categories.length - 1;
 
@@ -46,7 +54,7 @@ export const PostHero: React.FC<{
             {hasAuthors && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-1">
-                  <p className="text-sm">Author</p>
+                  <p className="text-sm">{getTranslation(locale, "common.author")}</p>
 
                   <p>{formatAuthors(populatedAuthors)}</p>
                 </div>
@@ -54,7 +62,7 @@ export const PostHero: React.FC<{
             )}
             {publishedAt && (
               <div className="flex flex-col gap-1">
-                <p className="text-sm">Date Published</p>
+                <p className="text-sm">{getTranslation(locale, "common.datePublished")}</p>
 
                 <time dateTime={publishedAt}>{formatDateTime(publishedAt)}</time>
               </div>

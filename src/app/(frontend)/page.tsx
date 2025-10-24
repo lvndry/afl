@@ -27,8 +27,6 @@ export default async function HomePage({ params }: HomePageProps) {
 
   const [heroPost, secondaryPost, ...gridPosts] = posts.docs;
 
-  console.log("Hero post data:", heroPost);
-
   return (
     <div className="min-h-screen">
       {/* Cinematic Hero Section */}
@@ -38,7 +36,7 @@ export default async function HomePage({ params }: HomePageProps) {
           <div className="absolute inset-0">
             <Image
               src={getHeroImageUrl(heroPost)}
-              alt={heroPost.title || "Featured story"}
+              alt={heroPost.title || getTranslation(locale, "common.featuredStory")}
               fill
               priority
               className="object-cover"
@@ -73,11 +71,11 @@ export default async function HomePage({ params }: HomePageProps) {
                     <div className="flex items-center gap-3">
                       <div className="h-10 w-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                         <span className="text-sm font-medium text-white">
-                          {getAuthorInitials(heroPost.populatedAuthors[0])}
+                          {getAuthorInitials(heroPost.populatedAuthors[0], locale)}
                         </span>
                       </div>
                       <span className="font-medium">
-                        {getAuthorName(heroPost.populatedAuthors[0])}
+                        {getAuthorName(heroPost.populatedAuthors[0], locale)}
                       </span>
                     </div>
                   )}
@@ -125,7 +123,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   <div className="relative aspect-[16/11] overflow-hidden rounded-2xl bg-muted">
                     <Image
                       src={getHeroImageUrl(secondaryPost)}
-                      alt={secondaryPost.title || "Article"}
+                      alt={secondaryPost.title || getTranslation(locale, "common.article")}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width: 1024px) 100vw, 60vw"
@@ -155,7 +153,7 @@ export default async function HomePage({ params }: HomePageProps) {
                     <div className="flex items-center gap-4 text-sm text-muted-foreground">
                       {secondaryPost.populatedAuthors?.[0] && (
                         <span className="font-medium">
-                          {getAuthorName(secondaryPost.populatedAuthors[0])}
+                          {getAuthorName(secondaryPost.populatedAuthors[0], locale)}
                         </span>
                       )}
                       {secondaryPost.publishedAt && (
@@ -194,7 +192,7 @@ export default async function HomePage({ params }: HomePageProps) {
                       <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-muted">
                         <Image
                           src={getHeroImageUrl(post)}
-                          alt={post.title || "Article"}
+                          alt={post.title || getTranslation(locale, "common.article")}
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="96px"
@@ -209,8 +207,8 @@ export default async function HomePage({ params }: HomePageProps) {
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
                           <span className="font-medium">
                             {post.populatedAuthors?.[0]
-                              ? getAuthorName(post.populatedAuthors[0])
-                              : getTranslation(locale, "homepage.anonymous")}
+                              ? getAuthorName(post.populatedAuthors[0], locale)
+                              : getTranslation(locale, "common.anonymous")}
                           </span>
                           {post.publishedAt && (
                             <>
@@ -242,7 +240,7 @@ export default async function HomePage({ params }: HomePageProps) {
                     <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-muted">
                       <Image
                         src={getHeroImageUrl(post)}
-                        alt={post.title || "Article"}
+                        alt={post.title || getTranslation(locale, "common.article")}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -298,13 +296,11 @@ function getHeroImageUrl(post: Post): string {
     "https://images.unsplash.com/flagged/photo-1561023367-156230cc1f07?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2348";
 
   if (!post.heroImage) {
-    console.log("No hero image found for post:", post.title);
     // Return a default placeholder image
     return DEFAULT_IMAGE;
   }
 
   if (typeof post.heroImage === "string") {
-    console.log("Hero image is string:", post.heroImage);
     return post.heroImage;
   }
 
@@ -319,14 +315,20 @@ function getCategoryTitle(category: string | { title?: string | null } | null | 
   return category.title || "";
 }
 
-function getAuthorName(author: string | { name?: string | null } | null | undefined): string {
-  if (!author) return "Anonymous";
-  if (typeof author === "string") return "Anonymous";
-  return author.name || "Anonymous";
+function getAuthorName(
+  author: string | { name?: string | null } | null | undefined,
+  locale: Locale,
+): string {
+  if (!author) return getTranslation(locale, "common.anonymous");
+  if (typeof author === "string") return getTranslation(locale, "common.anonymous");
+  return author.name || getTranslation(locale, "common.anonymous");
 }
 
-function getAuthorInitials(author: string | { name?: string | null } | null | undefined): string {
-  const name = getAuthorName(author);
+function getAuthorInitials(
+  author: string | { name?: string | null } | null | undefined,
+  locale: Locale,
+): string {
+  const name = getAuthorName(author, locale);
   return name
     .split(" ")
     .map((n) => n[0])
