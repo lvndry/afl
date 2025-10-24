@@ -133,7 +133,10 @@ export async function Footer({ locale = "fr" }: FooterProps) {
         <div className="py-6 border-t border-primary-foreground/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-caption text-primary-foreground/60">
-              {getTranslation(locale, "footer.copyright")}
+              {getTranslation(locale, "footer.copyright").replace(
+                "{year}",
+                new Date().getFullYear().toString(),
+              )}
             </p>
             <div className="flex items-center gap-6">
               <CMSLink

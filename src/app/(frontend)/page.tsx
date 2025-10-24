@@ -1,30 +1,12 @@
+import { getBrowserLocale } from "@/utilities/getBrowserLocale";
 import { formatDateByLocale, getTranslation, type Locale } from "@/utilities/translations";
 import configPromise from "@payload-config";
 import { ArrowUpRight, Calendar, Sparkles } from "lucide-react";
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { getPayload } from "payload";
 import { Post } from "../../payload-types";
-
-async function getBrowserLocale(): Promise<Locale> {
-  const headersList = await headers();
-  const acceptLanguage = headersList.get("accept-language");
-
-  if (acceptLanguage) {
-    const preferredLocale = acceptLanguage
-      .split(",")
-      .map((lang) => lang.split(";")[0].trim())
-      .find((lang) => ["fr", "en"].includes(lang.split("-")[0]));
-
-    if (preferredLocale) {
-      return preferredLocale.split("-")[0] as Locale;
-    }
-  }
-
-  return "fr"; // Default to French
-}
 
 export default async function HomePage() {
   const locale = await getBrowserLocale();

@@ -26,7 +26,7 @@
     "ourTeam": "Our Team",
     "contactUs": "Contact Us",
     "newsletter": "Newsletter",
-    "copyright": "© 2024 Afrique en Lumiere. All rights reserved.",
+    "copyright": "© {year} Afrique en Lumiere. All rights reserved.",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service"
   },
@@ -50,5 +50,83 @@
     "untitledCategory": "Untitled category",
     "author": "Author",
     "datePublished": "Date Published"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: December 2024",
+    "metaTitle": "Privacy Policy - Afrique en Lumière",
+    "metaDescription": "Learn how we protect your privacy and personal data on our creative media platform.",
+    "introduction": {
+      "title": "Introduction",
+      "content": "At Afrique en Lumière, we are committed to protecting your privacy and personal data. This privacy policy explains how we collect, use, and protect your information when you visit our website."
+    },
+    "dataCollection": {
+      "title": "Data Collection",
+      "content": "We only collect information necessary to improve your experience on our site:",
+      "list1": "Anonymous browsing information to analyze site usage",
+      "list2": "IP address for security and performance reasons",
+      "list3": "Technical cookies for proper site functioning"
+    },
+    "cookies": {
+      "title": "Cookies",
+      "content": "We only use essential technical cookies for site functionality. No tracking or advertising cookies are used."
+    },
+    "thirdParty": {
+      "title": "Third Parties",
+      "content": "We do not share your personal data with third parties. Our site may contain links to other websites, but we are not responsible for their privacy practices."
+    },
+    "rights": {
+      "title": "Your Rights",
+      "content": "In accordance with GDPR, you have the right to:",
+      "list1": "Access your personal data",
+      "list2": "Request correction of your data",
+      "list3": "Request deletion of your data"
+    },
+    "contact": {
+      "title": "Contact",
+      "content": "For any questions regarding this privacy policy, you can contact us through our contact page."
+    }
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: December 2024",
+    "metaTitle": "Terms of Service - Afrique en Lumière",
+    "metaDescription": "Review our terms of service to understand the usage rules of our creative media platform.",
+    "acceptance": {
+      "title": "Acceptance of Terms",
+      "content": "By accessing and using this website, you agree to be bound by these terms of service. If you do not agree to these terms, please do not use this site."
+    },
+    "use": {
+      "title": "Use of the Site",
+      "content": "You agree to use this site in a legal and responsible manner. It is prohibited to:",
+      "list1": "Use the site for illegal or unauthorized purposes",
+      "list2": "Attempt to access restricted areas of the site",
+      "list3": "Disrupt the site's operation",
+      "list4": "Copy or reproduce content without authorization"
+    },
+    "content": {
+      "title": "Content",
+      "content": "The content of this site is protected by copyright and belongs to Afrique en Lumière or its partners. Any unauthorized reproduction is prohibited."
+    },
+    "intellectual": {
+      "title": "Intellectual Property",
+      "content": "All elements of this site (texts, images, videos, logos) are protected by intellectual property rights. Any unauthorized use is strictly prohibited."
+    },
+    "disclaimer": {
+      "title": "Disclaimer",
+      "content": "The information on this site is provided for informational purposes only. We strive to maintain the accuracy of information, but we do not guarantee its completeness or accuracy."
+    },
+    "limitation": {
+      "title": "Limitation of Liability",
+      "content": "Afrique en Lumière cannot be held responsible for direct or indirect damages resulting from the use of this site or the inability to use it."
+    },
+    "changes": {
+      "title": "Changes",
+      "content": "We reserve the right to modify these terms of service at any time. Changes will take effect upon their publication on the site."
+    },
+    "contact": {
+      "title": "Contact",
+      "content": "For any questions regarding these terms of service, you can contact us through our contact page."
+    }
   }
 }
