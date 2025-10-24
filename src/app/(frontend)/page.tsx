@@ -2,19 +2,32 @@ import { formatDateByLocale, getTranslation, type Locale } from "@/utilities/tra
 import configPromise from "@payload-config";
 import { ArrowUpRight, Calendar, Sparkles } from "lucide-react";
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { getPayload } from "payload";
 import { Post } from "../../payload-types";
 
-interface HomePageProps {
-  params: {
-    locale?: string;
-  };
+async function getBrowserLocale(): Promise<Locale> {
+  const headersList = await headers();
+  const acceptLanguage = headersList.get("accept-language");
+
+  if (acceptLanguage) {
+    const preferredLocale = acceptLanguage
+      .split(",")
+      .map((lang) => lang.split(";")[0].trim())
+      .find((lang) => ["fr", "en"].includes(lang.split("-")[0]));
+
+    if (preferredLocale) {
+      return preferredLocale.split("-")[0] as Locale;
+    }
+  }
+
+  return "fr"; // Default to French
 }
 
-export default async function HomePage({ params }: HomePageProps) {
-  const locale = (params?.locale as Locale) || "fr";
+export default async function HomePage() {
+  const locale = await getBrowserLocale();
   const payload = await getPayload({ config: configPromise });
 
   const posts = await payload.find({
@@ -337,8 +350,8 @@ function getAuthorInitials(
     .slice(0, 2);
 }
 
-export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
-  const locale = (params?.locale as Locale) || "fr";
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getBrowserLocale();
 
   return {
     title: getTranslation(locale, "meta.title"),
