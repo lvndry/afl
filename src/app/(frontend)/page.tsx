@@ -1,3 +1,4 @@
+import { formatDateByLocale, getTranslation, type Locale } from "@/utilities/translations";
 import configPromise from "@payload-config";
 import { ArrowUpRight, Calendar, Sparkles } from "lucide-react";
 import type { Metadata } from "next";
@@ -6,7 +7,14 @@ import Link from "next/link";
 import { getPayload } from "payload";
 import { Post } from "../../payload-types";
 
-export default async function HomePage() {
+interface HomePageProps {
+  params: {
+    locale?: string;
+  };
+}
+
+export default async function HomePage({ params }: HomePageProps) {
+  const locale = (params?.locale as Locale) || "fr";
   const payload = await getPayload({ config: configPromise });
 
   const posts = await payload.find({
@@ -45,7 +53,7 @@ export default async function HomePage() {
               <div className="mb-6 flex items-center gap-3">
                 <Sparkles className="h-5 w-5 text-editorial-red" />
                 <span className="text-sm font-semibold uppercase tracking-wider text-white/90">
-                  Featured Story
+                  {getTranslation(locale, "homepage.featuredStory")}
                 </span>
               </div>
 
@@ -56,7 +64,7 @@ export default async function HomePage() {
 
                 <p className="mb-8 text-xl leading-relaxed text-white/85 max-w-3xl">
                   {heroPost.meta?.description ||
-                    "Explore this compelling story about culture, innovation, and the voices shaping our world."}
+                    getTranslation(locale, "homepage.defaultDescription")}
                 </p>
 
                 {/* Meta Info */}
@@ -76,7 +84,7 @@ export default async function HomePage() {
                   {heroPost.publishedAt && (
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4" />
-                      <time>{formatDate(heroPost.publishedAt)}</time>
+                      <time>{formatDateByLocale(heroPost.publishedAt, locale)}</time>
                     </div>
                   )}
                   {heroPost.categories?.[0] && getCategoryTitle(heroPost.categories[0]) && (
@@ -88,7 +96,7 @@ export default async function HomePage() {
 
                 {/* Read CTA */}
                 <div className="mt-8 inline-flex items-center gap-2 text-lg font-semibold text-white border-b-2 border-white/40 pb-1 group-hover:border-white transition-colors">
-                  Read Full Story
+                  {getTranslation(locale, "homepage.readFullStory")}
                   <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </Link>
@@ -140,7 +148,7 @@ export default async function HomePage() {
                     </h2>
                     <p className="text-body text-muted-foreground leading-relaxed mb-5">
                       {secondaryPost.meta?.description ||
-                        "Discover insights and stories from across the continent."}
+                        getTranslation(locale, "homepage.secondaryDescription")}
                     </p>
 
                     {/* Author & Date */}
@@ -153,7 +161,7 @@ export default async function HomePage() {
                       {secondaryPost.publishedAt && (
                         <>
                           <span>•</span>
-                          <time>{formatDate(secondaryPost.publishedAt)}</time>
+                          <time>{formatDateByLocale(secondaryPost.publishedAt, locale)}</time>
                         </>
                       )}
                     </div>
@@ -167,12 +175,14 @@ export default async function HomePage() {
           {gridPosts.length > 0 && (
             <div className="lg:col-span-5 space-y-6">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-subtitle font-semibold">Latest Stories</h3>
+                <h3 className="text-subtitle font-semibold">
+                  {getTranslation(locale, "homepage.latestStories")}
+                </h3>
                 <Link
                   href="/posts"
                   className="text-sm font-medium text-editorial-red hover:underline"
                 >
-                  View all
+                  {getTranslation(locale, "homepage.viewAll")}
                 </Link>
               </div>
 
@@ -200,12 +210,12 @@ export default async function HomePage() {
                           <span className="font-medium">
                             {post.populatedAuthors?.[0]
                               ? getAuthorName(post.populatedAuthors[0])
-                              : "Anonymous"}
+                              : getTranslation(locale, "homepage.anonymous")}
                           </span>
                           {post.publishedAt && (
                             <>
                               <span>•</span>
-                              <time>{formatDate(post.publishedAt)}</time>
+                              <time>{formatDateByLocale(post.publishedAt, locale)}</time>
                             </>
                           )}
                         </div>
@@ -221,7 +231,9 @@ export default async function HomePage() {
         {/* Full Width Grid - Remaining Articles */}
         {gridPosts.length > 4 && (
           <div>
-            <h3 className="text-subtitle font-semibold mb-8">More Stories</h3>
+            <h3 className="text-subtitle font-semibold mb-8">
+              {getTranslation(locale, "homepage.moreStories")}
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {gridPosts.slice(4).map((post) => (
                 <Link key={post.id} href={`/posts/${post.slug}`} className="group">
@@ -251,7 +263,9 @@ export default async function HomePage() {
                         {post.meta?.description}
                       </p>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        {post.publishedAt && <time>{formatDate(post.publishedAt)}</time>}
+                        {post.publishedAt && (
+                          <time>{formatDateByLocale(post.publishedAt, locale)}</time>
+                        )}
                       </div>
                     </div>
                   </article>
@@ -268,7 +282,7 @@ export default async function HomePage() {
               href="/posts"
               className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 text-lg font-semibold text-background hover:bg-foreground/90 transition-all hover:gap-3"
             >
-              Explore All Stories
+              {getTranslation(locale, "homepage.exploreAllStories")}
               <ArrowUpRight className="h-5 w-5" />
             </Link>
           </div>
@@ -281,7 +295,7 @@ export default async function HomePage() {
 // Helper functions
 function getHeroImageUrl(post: Post): string {
   const DEFAULT_IMAGE =
-    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop&crop=center";
+    "https://images.unsplash.com/flagged/photo-1561023367-156230cc1f07?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2348";
 
   if (!post.heroImage) {
     console.log("No hero image found for post:", post.title);
@@ -321,22 +335,16 @@ function getAuthorInitials(author: string | { name?: string | null } | null | un
     .slice(0, 2);
 }
 
-function formatDate(date: string): string {
-  return new Date(date).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-}
+export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
+  const locale = (params?.locale as Locale) || "fr";
 
-export const metadata: Metadata = {
-  title: "Afrique en Lumière - Home",
-  description:
-    "Follow our latest news, events, and voices that bring African worlds to life in the present.",
-  openGraph: {
-    title: "Afrique en Lumière - Home",
-    description:
-      "Follow our latest news, events, and voices that bring African worlds to life in the present.",
-    type: "website",
-  },
-};
+  return {
+    title: getTranslation(locale, "meta.title"),
+    description: getTranslation(locale, "meta.description"),
+    openGraph: {
+      title: getTranslation(locale, "meta.title"),
+      description: getTranslation(locale, "meta.description"),
+      type: "website",
+    },
+  };
+}

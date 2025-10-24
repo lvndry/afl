@@ -1,0 +1,17 @@
+{
+  "homepage": {
+    "featuredStory": "Article en Vedette",
+    "readFullStory": "Lire l'Article Complet",
+    "latestStories": "Dernières Histoires",
+    "viewAll": "Voir tout",
+    "moreStories": "Plus d'Histoires",
+    "exploreAllStories": "Explorer Toutes les Histoires",
+    "anonymous": "Anonyme",
+    "defaultDescription": "Explorez cette histoire captivante sur la culture, l'innovation et les voix qui façonnent notre monde.",
+    "secondaryDescription": "Découvrez des insights et des histoires de tout le continent."
+  },
+  "meta": {
+    "title": "Afrique en Lumière - Accueil",
+    "description": "Suivez nos dernières nouvelles, événements et voix qui donnent vie aux mondes africains dans le présent."
+  }
+}
