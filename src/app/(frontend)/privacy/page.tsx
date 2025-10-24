@@ -14,10 +14,6 @@ export default async function PrivacyPage() {
           </h1>
 
           <div className="prose prose-lg max-w-none">
-            <p className="text-xl text-muted-foreground mb-8">
-              {getTranslation(locale, "privacy.lastUpdated")}
-            </p>
-
             <div className="space-y-8">
               <section>
                 <h2 className="text-headline font-editorial text-foreground mb-4">

@@ -4,13 +4,11 @@ import Link from "next/link";
 import { CMSLink } from "@/components/Link";
 import { Logo } from "@/components/Logo/Logo";
 import { SITE_CONFIG } from "@/config/site";
-import { getTranslation, type Locale } from "@/utilities/translations";
+import { getTranslation } from "@/utilities/translations";
+import { getBrowserLocale } from "../utilities/getBrowserLocale";
 
-interface FooterProps {
-  locale?: Locale;
-}
-
-export async function Footer({ locale = "fr" }: FooterProps) {
+export async function Footer() {
+  const locale = await getBrowserLocale();
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container-editorial">

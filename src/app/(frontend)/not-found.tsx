@@ -1,14 +1,12 @@
-import { headers } from "next/headers";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { getTranslation, type Locale } from "@/utilities/translations";
+import { getBrowserLocale } from "@/utilities/getBrowserLocale";
+import { getTranslation } from "@/utilities/translations";
 
 export default async function NotFound() {
   // Get locale from headers
-  const headersList = await headers();
-  const pathname = headersList.get("x-pathname") || "";
-  const locale = (pathname.split("/")[1] as Locale) || "fr";
+  const locale = await getBrowserLocale();
 
   return (
     <div className="container py-28">

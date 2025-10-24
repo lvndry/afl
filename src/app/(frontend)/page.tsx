@@ -1,3 +1,4 @@
+import { Post } from "@/payload-types";
 import { getBrowserLocale } from "@/utilities/getBrowserLocale";
 import { formatDateByLocale, getTranslation, type Locale } from "@/utilities/translations";
 import configPromise from "@payload-config";
@@ -6,7 +7,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getPayload } from "payload";
-import { Post } from "../../payload-types";
 
 export default async function HomePage() {
   const locale = await getBrowserLocale();

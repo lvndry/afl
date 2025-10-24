@@ -9,17 +9,17 @@ import React, { useEffect, useState } from "react";
 
 import { SITE_CONFIG } from "@/config/site";
 import type { Header } from "@/payload-types";
-import { getTranslation, type Locale } from "@/utilities/translations";
+import { useClientLocale } from "@/utilities/getClientLocale";
+import { getTranslation } from "@/utilities/translations";
 
 import { CMSLink } from "@/components/Link";
 import { Logo } from "@/components/Logo/Logo";
 
 interface HeaderClientProps {
   data: Header;
-  locale?: Locale;
 }
 
-export const HeaderClient: React.FC<HeaderClientProps> = ({ data, locale = "fr" }) => {
+export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   /* Storing the value in a useState to avoid hydration errors */
   const [theme, setTheme] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,6 +27,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, locale = "fr" 
   const { headerTheme, setHeaderTheme } = useHeaderTheme();
   const { isVisible: isAdminBarVisible } = useAdminBar();
   const pathname = usePathname();
+  const locale = useClientLocale();
 
   useEffect(() => {
     setHeaderTheme(null);

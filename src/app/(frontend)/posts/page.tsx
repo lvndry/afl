@@ -1,10 +1,10 @@
 import type { Metadata } from "next/types";
 
 import { ArticleCard } from "@/components/ui/article-card";
-import { getTranslation, type Locale } from "@/utilities/translations";
+import { getBrowserLocale } from "@/utilities/getBrowserLocale";
+import { getTranslation } from "@/utilities/translations";
 import configPromise from "@payload-config";
 import { ArrowRight } from "lucide-react";
-import { headers } from "next/headers";
 import Link from "next/link";
 import { getPayload } from "payload";
 import PageClient from "./page.client";
@@ -16,9 +16,7 @@ export default async function Page() {
   const payload = await getPayload({ config: configPromise });
 
   // Get locale from headers
-  const headersList = await headers();
-  const pathname = headersList.get("x-pathname") || "";
-  const locale = (pathname.split("/")[1] as Locale) || "fr";
+  const locale = await getBrowserLocale();
 
   const posts = await payload.find({
     collection: "posts",
@@ -62,10 +60,7 @@ export default async function Page() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  // Get locale from headers
-  const headersList = await headers();
-  const pathname = headersList.get("x-pathname") || "";
-  const locale = (pathname.split("/")[1] as Locale) || "fr";
+  const locale = await getBrowserLocale();
 
   return {
     title: getTranslation(locale, "posts.mainTitle"),

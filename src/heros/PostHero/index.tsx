@@ -5,18 +5,15 @@ import type { Post } from "@/payload-types";
 
 import { Media } from "@/components/Media";
 import { formatAuthors } from "@/utilities/formatAuthors";
-import { getTranslation, type Locale } from "@/utilities/translations";
-import { headers } from "next/headers";
+import { getBrowserLocale } from "@/utilities/getBrowserLocale";
+import { getTranslation } from "@/utilities/translations";
 
 export const PostHero: React.FC<{
   post: Post;
 }> = async ({ post }) => {
   const { categories, heroImage, populatedAuthors, publishedAt, title } = post;
 
-  // Get locale from headers
-  const headersList = await headers();
-  const pathname = headersList.get("x-pathname") || "";
-  const locale = (pathname.split("/")[1] as Locale) || "fr";
+  const locale = await getBrowserLocale();
 
   const hasAuthors =
     populatedAuthors && populatedAuthors.length > 0 && formatAuthors(populatedAuthors) !== "";

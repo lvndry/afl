@@ -1,10 +1,10 @@
 import type { Metadata } from "next/types";
 
 import { ArticleCard } from "@/components/ui/article-card";
-import { getTranslation, type Locale } from "@/utilities/translations";
+import { getBrowserLocale } from "@/utilities/getBrowserLocale";
+import { getTranslation } from "@/utilities/translations";
 import configPromise from "@payload-config";
 import { ArrowRight } from "lucide-react";
-import { headers } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPayload } from "payload";
@@ -22,10 +22,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { pageNumber } = await paramsPromise;
   const payload = await getPayload({ config: configPromise });
 
-  // Get locale from headers
-  const headersList = await headers();
-  const pathname = headersList.get("x-pathname") || "";
-  const locale = (pathname.split("/")[1] as Locale) || "fr";
+  const locale = await getBrowserLocale();
 
   const sanitizedPageNumber = Number(pageNumber);
 
@@ -77,11 +74,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { pageNumber } = await paramsPromise;
-
-  // Get locale from headers
-  const headersList = await headers();
-  const pathname = headersList.get("x-pathname") || "";
-  const locale = (pathname.split("/")[1] as Locale) || "fr";
+  const locale = await getBrowserLocale();
 
   return {
     title: getTranslation(locale, "posts.pageTitle").replace("{pageNumber}", pageNumber),
