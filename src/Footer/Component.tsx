@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { CMSLink } from "@/components/Link";
 import { Logo } from "@/components/Logo/Logo";
+import { SITE_CONFIG } from "@/config/site";
 import { getTranslation, type Locale } from "@/utilities/translations";
 
 interface FooterProps {
@@ -20,7 +21,7 @@ export async function Footer({ locale = "fr" }: FooterProps) {
             <div className="lg:col-span-2">
               <Link href="/" className="flex items-center gap-3 mb-6 group">
                 <Logo className="h-10 w-auto transition-transform group-hover:scale-105" />
-                <span className="text-xl font-editorial font-semibold">Afrique en Lumiere</span>
+                <span className="text-xl font-editorial font-semibold">{SITE_CONFIG.name}</span>
               </Link>
               <p className="text-body text-primary-foreground/80 leading-relaxed mb-8 max-w-md">
                 {getTranslation(locale, "footer.description")}

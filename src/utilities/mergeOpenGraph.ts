@@ -1,17 +1,17 @@
+import { SITE_CONFIG } from "@/config/site";
 import type { Metadata } from "next";
 import { getServerSideURL } from "./getURL";
 
 const defaultOpenGraph: Metadata["openGraph"] = {
   type: "website",
-  description:
-    "Afrique en Lumiere - Creative Media and Journalism Website showcasing African stories and voices.",
+  description: `${SITE_CONFIG.name} - ${SITE_CONFIG.description}`,
   images: [
     {
-      url: `${getServerSideURL()}/website-template-OG.webp`,
+      url: `${getServerSideURL()}${SITE_CONFIG.ogImage}`,
     },
   ],
-  siteName: "Afrique en Lumiere",
-  title: "Afrique en Lumiere",
+  siteName: SITE_CONFIG.name,
+  title: SITE_CONFIG.name,
 };
 
 export const mergeOpenGraph = (og?: Metadata["openGraph"]): Metadata["openGraph"] => {

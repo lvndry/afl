@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
+import { SITE_CONFIG } from "@/config/site";
 import type { Header } from "@/payload-types";
 import { getTranslation, type Locale } from "@/utilities/translations";
 
@@ -64,7 +65,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, locale = "fr" 
                 className="h-8 w-auto transition-transform group-hover:scale-105"
               />
               <span className="text-lg font-editorial font-semibold text-foreground">
-                Afrique en Lumiere
+                {SITE_CONFIG.name}
               </span>
             </Link>
 

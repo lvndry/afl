@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 
 import type { Config, Media, Page, Post } from "../payload-types";
 
+import { SITE_CONFIG } from "@/config/site";
 import { getServerSideURL } from "./getURL";
 import { mergeOpenGraph } from "./mergeOpenGraph";
 
 function getImageURL(image?: Media | Config["db"]["defaultIDType"] | null) {
   const serverUrl = getServerSideURL();
 
-  let url = serverUrl + "/website-template-OG.webp";
+  let url = serverUrl + SITE_CONFIG.ogImage;
 
   if (image && typeof image === "object" && "url" in image) {
     const ogUrl = image.sizes?.og?.url;
@@ -26,9 +27,7 @@ export async function generateMeta(args: {
 
   const ogImage = getImageURL(doc?.meta?.image);
 
-  const title = doc?.meta?.title
-    ? doc?.meta?.title + " | Afrique en Lumiere"
-    : "Afrique en Lumiere";
+  const title = doc?.meta?.title ? doc?.meta?.title + " | " + SITE_CONFIG.name : SITE_CONFIG.name;
 
   return {
     description: doc?.meta?.description,
