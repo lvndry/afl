@@ -62,105 +62,67 @@ export async function Footer({ locale = "fr" }: FooterProps) {
 
             {/* Navigation Sections */}
             <div>
-              <h3 className="text-subtitle font-editorial font-semibold mb-6">
-                {getTranslation(locale, "footer.stories")}
-              </h3>
               <nav className="space-y-3">
                 <CMSLink
                   className="block text-body text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  {...{
-                    link: {
-                      type: "reference",
-                      reference: null,
-                      url: "/posts",
-                      label: getTranslation(locale, "footer.allStories"),
-                    },
-                  }}
+                  type="reference"
+                  reference={null}
+                  url="/posts"
+                  label={getTranslation(locale, "footer.allStories")}
                 />
                 <CMSLink
                   className="block text-body text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  {...{
-                    link: {
-                      type: "reference",
-                      reference: null,
-                      url: "/categories/culture",
-                      label: getTranslation(locale, "footer.culture"),
-                    },
-                  }}
+                  type="reference"
+                  reference={null}
+                  url="/categories/culture"
+                  label={getTranslation(locale, "footer.culture")}
                 />
                 <CMSLink
                   className="block text-body text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  {...{
-                    link: {
-                      type: "reference",
-                      reference: null,
-                      url: "/categories/politics",
-                      label: getTranslation(locale, "footer.politics"),
-                    },
-                  }}
+                  type="reference"
+                  reference={null}
+                  url="/categories/politics"
+                  label={getTranslation(locale, "footer.politics")}
                 />
                 <CMSLink
                   className="block text-body text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  {...{
-                    link: {
-                      type: "reference",
-                      reference: null,
-                      url: "/categories/innovation",
-                      label: getTranslation(locale, "footer.innovation"),
-                    },
-                  }}
+                  type="reference"
+                  reference={null}
+                  url="/categories/innovation"
+                  label={getTranslation(locale, "footer.innovation")}
                 />
               </nav>
             </div>
 
             <div>
-              <h3 className="text-subtitle font-editorial font-semibold mb-6">
-                {getTranslation(locale, "footer.about")}
-              </h3>
               <nav className="space-y-3">
                 <CMSLink
                   className="block text-body text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  {...{
-                    link: {
-                      type: "reference",
-                      reference: null,
-                      url: "/about",
-                      label: getTranslation(locale, "footer.ourMission"),
-                    },
-                  }}
+                  type="reference"
+                  reference={null}
+                  url="/about"
+                  label={getTranslation(locale, "footer.ourMission")}
                 />
                 <CMSLink
                   className="block text-body text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  {...{
-                    link: {
-                      type: "reference",
-                      reference: null,
-                      url: "/team",
-                      label: getTranslation(locale, "footer.ourTeam"),
-                    },
-                  }}
+                  type="reference"
+                  reference={null}
+                  url="/team"
+                  label={getTranslation(locale, "footer.ourTeam")}
                 />
                 <CMSLink
                   className="block text-body text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  {...{
-                    link: {
-                      type: "reference",
-                      reference: null,
-                      url: "/contact",
-                      label: getTranslation(locale, "footer.contactUs"),
-                    },
-                  }}
+                  type="reference"
+                  reference={null}
+                  url="/contact"
+                  label={getTranslation(locale, "footer.contactUs")}
                 />
                 <CMSLink
                   className="block text-body text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  {...{
-                    link: {
-                      type: "reference",
-                      reference: null,
-                      url: "/newsletter",
-                      label: getTranslation(locale, "footer.newsletter"),
-                    },
-                  }}
+                  type="reference"
+                  reference={null}
+                  url="/newsletter"
+                  label={getTranslation(locale, "footer.newsletter")}
                 />
               </nav>
             </div>
@@ -176,27 +138,18 @@ export async function Footer({ locale = "fr" }: FooterProps) {
             <div className="flex items-center gap-6">
               <CMSLink
                 className="text-caption text-primary-foreground/60 hover:text-primary-foreground transition-colors"
-                {...{
-                  link: {
-                    type: "reference",
-                    reference: null,
-                    url: "/privacy",
-                    label: getTranslation(locale, "footer.privacyPolicy"),
-                  },
-                }}
+                type="reference"
+                reference={null}
+                url="/privacy"
+                label={getTranslation(locale, "footer.privacyPolicy")}
               />
               <CMSLink
                 className="text-caption text-primary-foreground/60 hover:text-primary-foreground transition-colors"
-                {...{
-                  link: {
-                    type: "reference",
-                    reference: null,
-                    url: "/terms",
-                    label: getTranslation(locale, "footer.termsOfService"),
-                  },
-                }}
+                type="reference"
+                reference={null}
+                url="/terms"
+                label={getTranslation(locale, "footer.termsOfService")}
               />
-              {/* Theme Selector removed */}
             </div>
           </div>
         </div>
