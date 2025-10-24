@@ -13,5 +13,25 @@
   "meta": {
     "title": "Afrique en Lumière - Home",
     "description": "Follow our latest news, events, and voices that bring African worlds to life in the present."
+  },
+  "footer": {
+    "description": "We illuminate the stories, voices, and perspectives that shape the African continent. Through creative media and journalism, we bring authentic narratives to the world.",
+    "stories": "Stories",
+    "about": "About",
+    "allStories": "All Stories",
+    "culture": "Culture",
+    "politics": "Politics",
+    "innovation": "Innovation",
+    "ourMission": "Our Mission",
+    "ourTeam": "Our Team",
+    "contactUs": "Contact Us",
+    "newsletter": "Newsletter",
+    "copyright": "© 2024 Afrique en Lumiere. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  },
+  "header": {
+    "search": "Search",
+    "toggleMenu": "Toggle menu"
   }
 }

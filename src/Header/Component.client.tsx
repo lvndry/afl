@@ -7,15 +7,17 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import type { Header } from "@/payload-types";
+import { getTranslation, type Locale } from "@/utilities/translations";
 
 import { CMSLink } from "@/components/Link";
 import { Logo } from "@/components/Logo/Logo";
 
 interface HeaderClientProps {
   data: Header;
+  locale?: Locale;
 }
 
-export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
+export const HeaderClient: React.FC<HeaderClientProps> = ({ data, locale = "fr" }) => {
   /* Storing the value in a useState to avoid hydration errors */
   const [theme, setTheme] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -88,7 +90,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
               <Link
                 href="/search"
                 className="p-2 text-foreground/60 hover:text-foreground transition-colors"
-                aria-label="Search"
+                aria-label={getTranslation(locale, "header.search")}
               >
                 <Search className="w-5 h-5" />
               </Link>
@@ -99,7 +101,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
               <button
                 className="lg:hidden p-2 text-foreground/60 hover:text-foreground transition-colors"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-label="Toggle menu"
+                aria-label={getTranslation(locale, "header.toggleMenu")}
               >
                 {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>

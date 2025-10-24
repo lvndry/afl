@@ -3,8 +3,13 @@ import Link from "next/link";
 
 import { CMSLink } from "@/components/Link";
 import { Logo } from "@/components/Logo/Logo";
+import { getTranslation, type Locale } from "@/utilities/translations";
 
-export async function Footer() {
+interface FooterProps {
+  locale?: Locale;
+}
+
+export async function Footer({ locale = "fr" }: FooterProps) {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container-editorial">
@@ -18,9 +23,7 @@ export async function Footer() {
                 <span className="text-xl font-editorial font-semibold">Afrique en Lumiere</span>
               </Link>
               <p className="text-body text-primary-foreground/80 leading-relaxed mb-8 max-w-md">
-                We illuminate the stories, voices, and perspectives that shape the African
-                continent. Through creative media and journalism, we bring authentic narratives to
-                the world.
+                {getTranslation(locale, "footer.description")}
               </p>
 
               {/* Social Links */}
@@ -58,7 +61,9 @@ export async function Footer() {
 
             {/* Navigation Sections */}
             <div>
-              <h3 className="text-subtitle font-editorial font-semibold mb-6">Stories</h3>
+              <h3 className="text-subtitle font-editorial font-semibold mb-6">
+                {getTranslation(locale, "footer.stories")}
+              </h3>
               <nav className="space-y-3">
                 <CMSLink
                   className="block text-body text-primary-foreground/80 hover:text-primary-foreground transition-colors"
@@ -67,7 +72,7 @@ export async function Footer() {
                       type: "reference",
                       reference: null,
                       url: "/posts",
-                      label: "All Stories",
+                      label: getTranslation(locale, "footer.allStories"),
                     },
                   }}
                 />
@@ -78,7 +83,7 @@ export async function Footer() {
                       type: "reference",
                       reference: null,
                       url: "/categories/culture",
-                      label: "Culture",
+                      label: getTranslation(locale, "footer.culture"),
                     },
                   }}
                 />
@@ -89,7 +94,7 @@ export async function Footer() {
                       type: "reference",
                       reference: null,
                       url: "/categories/politics",
-                      label: "Politics",
+                      label: getTranslation(locale, "footer.politics"),
                     },
                   }}
                 />
@@ -100,7 +105,7 @@ export async function Footer() {
                       type: "reference",
                       reference: null,
                       url: "/categories/innovation",
-                      label: "Innovation",
+                      label: getTranslation(locale, "footer.innovation"),
                     },
                   }}
                 />
@@ -108,7 +113,9 @@ export async function Footer() {
             </div>
 
             <div>
-              <h3 className="text-subtitle font-editorial font-semibold mb-6">About</h3>
+              <h3 className="text-subtitle font-editorial font-semibold mb-6">
+                {getTranslation(locale, "footer.about")}
+              </h3>
               <nav className="space-y-3">
                 <CMSLink
                   className="block text-body text-primary-foreground/80 hover:text-primary-foreground transition-colors"
@@ -117,14 +124,19 @@ export async function Footer() {
                       type: "reference",
                       reference: null,
                       url: "/about",
-                      label: "Our Mission",
+                      label: getTranslation(locale, "footer.ourMission"),
                     },
                   }}
                 />
                 <CMSLink
                   className="block text-body text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   {...{
-                    link: { type: "reference", reference: null, url: "/team", label: "Our Team" },
+                    link: {
+                      type: "reference",
+                      reference: null,
+                      url: "/team",
+                      label: getTranslation(locale, "footer.ourTeam"),
+                    },
                   }}
                 />
                 <CMSLink
@@ -134,7 +146,7 @@ export async function Footer() {
                       type: "reference",
                       reference: null,
                       url: "/contact",
-                      label: "Contact Us",
+                      label: getTranslation(locale, "footer.contactUs"),
                     },
                   }}
                 />
@@ -145,7 +157,7 @@ export async function Footer() {
                       type: "reference",
                       reference: null,
                       url: "/newsletter",
-                      label: "Newsletter",
+                      label: getTranslation(locale, "footer.newsletter"),
                     },
                   }}
                 />
@@ -158,7 +170,7 @@ export async function Footer() {
         <div className="py-6 border-t border-primary-foreground/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-caption text-primary-foreground/60">
-              © 2024 Afrique en Lumiere. All rights reserved.
+              {getTranslation(locale, "footer.copyright")}
             </p>
             <div className="flex items-center gap-6">
               <CMSLink
@@ -168,7 +180,7 @@ export async function Footer() {
                     type: "reference",
                     reference: null,
                     url: "/privacy",
-                    label: "Privacy Policy",
+                    label: getTranslation(locale, "footer.privacyPolicy"),
                   },
                 }}
               />
@@ -179,7 +191,7 @@ export async function Footer() {
                     type: "reference",
                     reference: null,
                     url: "/terms",
-                    label: "Terms of Service",
+                    label: getTranslation(locale, "footer.termsOfService"),
                   },
                 }}
               />

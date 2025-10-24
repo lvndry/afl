@@ -11,9 +11,10 @@ import { Footer } from "@/Footer/Component";
 import { Header } from "@/Header/Component";
 import { Providers } from "@/providers";
 import { mergeOpenGraph } from "@/utilities/mergeOpenGraph";
-import { draftMode } from "next/headers";
+import { draftMode, headers } from "next/headers";
 
 import { getServerSideURL } from "@/utilities/getURL";
+import { type Locale } from "@/utilities/translations";
 
 import "./globals.css";
 
@@ -26,11 +27,16 @@ const fraunces = Fraunces({
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode();
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") || "";
+
+  // Extract locale from pathname (e.g., /fr/ or /en/)
+  const locale = (pathname.split("/")[1] as Locale) || "fr";
 
   return (
     <html
       className={cn(GeistSans.variable, GeistMono.variable, fraunces.variable)}
-      lang="en"
+      lang={locale}
       data-theme="light"
       suppressHydrationWarning
     >
@@ -46,9 +52,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             }}
           />
 
-          <Header />
+          <Header locale={locale} />
           <main className="flex-1">{children}</main>
-          <Footer />
+          <Footer locale={locale} />
         </Providers>
       </body>
     </html>

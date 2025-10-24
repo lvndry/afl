@@ -1,6 +1,6 @@
 {
   "homepage": {
-    "featuredStory": "Article en Vedette",
+    "featuredStory": "Dernier Article",
     "readFullStory": "Lire l'Article Complet",
     "latestStories": "Dernières Histoires",
     "viewAll": "Voir tout",
@@ -13,5 +13,25 @@
   "meta": {
     "title": "Afrique en Lumière - Accueil",
     "description": "Suivez nos dernières nouvelles, événements et voix qui donnent vie aux mondes africains dans le présent."
+  },
+  "footer": {
+    "description": "Nous éclairons les histoires, les voix et les perspectives qui façonnent le continent africain. À travers les médias créatifs et le journalisme, nous apportons des récits authentiques au monde.",
+    "stories": "Histoires",
+    "about": "À Propos",
+    "allStories": "Toutes les Histoires",
+    "culture": "Culture",
+    "politics": "Politique",
+    "innovation": "Innovation",
+    "ourMission": "Notre Mission",
+    "ourTeam": "Notre Équipe",
+    "contactUs": "Nous Contacter",
+    "newsletter": "Newsletter",
+    "copyright": "© 2024 Afrique en Lumiere. Tous droits réservés.",
+    "privacyPolicy": "Politique de Confidentialité",
+    "termsOfService": "Conditions d'Utilisation"
+  },
+  "header": {
+    "search": "Rechercher",
+    "toggleMenu": "Basculer le menu"
   }
 }

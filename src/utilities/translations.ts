@@ -19,6 +19,26 @@ export type TranslationKeys = {
     title: string;
     description: string;
   };
+  footer: {
+    description: string;
+    stories: string;
+    about: string;
+    allStories: string;
+    culture: string;
+    politics: string;
+    innovation: string;
+    ourMission: string;
+    ourTeam: string;
+    contactUs: string;
+    newsletter: string;
+    copyright: string;
+    privacyPolicy: string;
+    termsOfService: string;
+  };
+  header: {
+    search: string;
+    toggleMenu: string;
+  };
 };
 
 const translations: Record<Locale, TranslationKeys> = {
